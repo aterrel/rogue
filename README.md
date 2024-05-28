@@ -14,4 +14,3 @@ Currently using pygame zero, use the following command
 ```
 $ pgzero rogue/runner.py
 ```
-
