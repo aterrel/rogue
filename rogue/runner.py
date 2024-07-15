@@ -49,6 +49,7 @@ class Board:
             screen.draw.filled_rect(m, (0, 200, 0))
 
     def draw_coins(self):
+        screen.draw.text("score: " + str(self.SCORE), (0, 25), color = (255,255,255))
         for coin in self.coins:
             n = Rect((coin[0] * self.TILE_WIDTH, 
                       coin[1] * self.TILE_HEIGHT), 
@@ -66,7 +67,7 @@ class Board:
         c_idx = -1
         for i, coin in enumerate(self.coins):
             if coin[0] == x and coin[1] == y:
-                self.score += 1
+                self.SCORE += 1
                 c_idx = i
         if c_idx != -1:
             self.coins.pop(c_idx)
@@ -77,8 +78,8 @@ class Character:
     COLOR = ( 200, 0, 0)
 
     def __init__(self):
-        self.x = 0
-        self.y = 0
+        self.x = 1
+        self.y = 1
 
     def draw(self, board,):
         r = Rect((self.x * board.TILE_WIDTH, self.y * board.TILE_HEIGHT), 
@@ -97,6 +98,8 @@ class World:
 
     def move_character(self, x, y):
         if self.b.has_obstacle(self.c.x + x, self.c.y + y):
+            return None
+        if self.b.hit_coin(self.c.x + x, self.c.y + y):
             return None
 
         self.c.x += x
