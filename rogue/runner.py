@@ -14,11 +14,13 @@ class Board:
     SCORE = 0
     BORDERS = (0, 100, 100)
 
+
     def __init__(self):
         self.obstacles = [(random.randint(2, self.MAX_X_TILE - 1), random.randint(2, self.MAX_Y_TILE - 1))
                           for i in range(10)]
         self.coins = self.generate_coins()
     
+
     def generate_coins(self):
         num_coins = 10
         coins = []
@@ -30,16 +32,19 @@ class Board:
             coins.append(coin)
         return coins
 
+
     def draw(self):
         self.draw_board()
         self.draw_obstacles()
         self.draw_coins()
+
 
     def draw_board(self):
         for i in range(self.TILE_WIDTH, self.BOARD_HEIGHT, self.TILE_WIDTH):
             screen.draw.line((0, i), (self.BOARD_WIDTH, i), self.BORDERS)
         for i in range(self.TILE_HEIGHT, self.BOARD_WIDTH, self.TILE_HEIGHT):
             screen.draw.line((i, 0), (i, self.BOARD_HEIGHT), self.BORDERS)
+
 
     def draw_obstacles(self):
         for obstacle in self.obstacles:
@@ -48,6 +53,7 @@ class Board:
                      (self.TILE_WIDTH, self.TILE_HEIGHT))
             screen.draw.filled_rect(m, (0, 200, 0))
 
+
     def draw_coins(self):
         screen.draw.text("score: " + str(self.SCORE), (0, 25), color = (255,255,255))
         for coin in self.coins:
@@ -55,6 +61,7 @@ class Board:
                       coin[1] * self.TILE_HEIGHT), 
                      (self.TILE_WIDTH, self.TILE_HEIGHT))
             screen.draw.filled_rect(n, (255, 255, 0))
+
 
     def has_obstacle(self, x, y):
         """Given tile x and y, checks to see if there is an obstacle"""
@@ -73,6 +80,7 @@ class Board:
             self.coins.pop(c_idx)
         return
         
+
 
 class Character:
     COLOR = ( 200, 0, 0)
@@ -141,6 +149,7 @@ def move():
         world.move_character(-1, 0)
     if keyboard.right:
         world.move_character(1, 0)
+
 
 def update():
     move()
